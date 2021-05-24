@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import TodaysDate from "./TodaysDate";
 import axios from "axios";
 import "./Weather.css";
 
 export default function Weather() {
-    const [ready, setReady] = useState({ ready: false });
-    const [weatherData, setWeatherData] = useState({});
+   //const [ready, setReady] = useState({ ready: false });
+    const [weatherData, setWeatherData] = useState({ ready: false });
    
     function handleResponse(response) {
+      console.log(response.data);
         setWeatherData({
         ready: true,
         temperature: response.data.main.temp,
@@ -14,7 +16,7 @@ export default function Weather() {
         city: response.data.name,
         description: response.data.weather[0].description,
         humidity: response.data.main.humidity,
-        date: "Monday 11:33",
+        date: new Date(response.data.dt * 1000),
         iconUrl:"https://ssl.gstatic.com/onebox/weather/64/sunny.png",
 });
 }
@@ -38,7 +40,7 @@ if (weatherData.ready) {
         </h1>
         <ul>
             <li>
-                {weatherData.date}
+               <TodaysDate date={weatherData.date} />
             </li>
             <li className="text-capitalize">
                 {weatherData.description}
