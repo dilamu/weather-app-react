@@ -57,3 +57,4 @@ if (loaded) {
 
 
 //follow the code
+//give code to each file to follow each code
